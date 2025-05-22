@@ -42,8 +42,8 @@ tickers:
 scheduler:
   intervals:      # интервалы в минутах
     stock: 1
-    currency: 2
-    bond: 3
+    currency: 5
+    bond: 10
 
 settings:
   period: 60       # число дней истории
