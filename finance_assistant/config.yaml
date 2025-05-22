@@ -1,0 +1,51 @@
+# config.yaml
+
+tickers:
+  stock:
+    - AAPL
+    - MSFT
+    - GOOG
+    - AMZN
+    - TSLA
+    - NVDA
+    - META
+    - BRK-B
+    - JPM
+    - UNH
+    - V
+    - PG
+    - JNJ
+    - HD
+    - MA
+    - BAC
+    - XOM
+    - PFE
+    - KO
+    - TM
+  currency:
+    - EURUSD=X
+    - GBPUSD=X
+    - USDJPY=X
+    - USDCAD=X
+    - AUDUSD=X
+    - USDCHF=X
+    - NZDUSD=X
+    - EURGBP=X
+    - EURJPY=X
+    - EURAUD=X
+  bond:
+    - ^IRX
+    - ^FVX
+    - ^TNX
+    - ^TYX
+
+scheduler:
+  intervals:      # интервалы в минутах
+    stock: 1
+    currency: 2
+    bond: 3
+
+settings:
+  period: 60       # число дней истории
+  sma_window: 14
+  ema_window: 14

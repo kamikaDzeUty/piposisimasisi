@@ -8,7 +8,7 @@ from src.domain.repositories.asset_repository import AssetRepository
 from src.domain.entities.stock import Stock
 from src.domain.entities.currency import Currency
 from src.domain.entities.bond import Bond
-from src.config.tickers import STOCK_TICKERS, CURRENCY_TICKERS, BOND_TICKERS
+from src.config.settings import settings
 
 
 class YahooAssetRepository(AssetRepository):
@@ -16,23 +16,26 @@ class YahooAssetRepository(AssetRepository):
     Берёт тикеры из конфигурации и скачивает их историю через yfinance.
     """
 
-    def list_assets(self, asset_type: str) -> List:
+    @staticmethod
+    def list_assets(asset_type: str) -> List:
         if asset_type == "stock":
-            return [Stock(sym, sym) for sym in STOCK_TICKERS]
+            return [Stock(s, s) for s in settings.tickers.stock]
         if asset_type == "currency":
-            return [Currency(sym, sym) for sym in CURRENCY_TICKERS]
+            return [Currency(s, s) for s in settings.tickers.currency]
         if asset_type == "bond":
             return [
-                Bond(ticker, ticker, coupon_rate=0.0, maturity_date="")
-                for ticker in BOND_TICKERS
+                Bond(s, s, coupon_rate=0.0, maturity_date="")
+                for s in settings.tickers.bond
             ]
         return []
 
-    def fetch_prices(self, symbol: str, period: int) -> List[float]:
-        # period — число дней, yfinance принимает строку вида "60d"
+    @staticmethod
+    def fetch_prices(symbol: str, period: int) -> List[float]:
+        # period передаётся извне, но по умолчанию берём settings.period
+        days = f"{period}d"
         data = yf.download(
             tickers=symbol,
-            period=f"{period}d",
+            period=days,
             interval="1d",
             progress=False,
             threads=False

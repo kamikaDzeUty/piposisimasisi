@@ -1,4 +1,6 @@
-from src.presentation.console import run_console
+import sys
+from src.presentation.scheduler import start_scheduler
 
 if __name__ == "__main__":
-    run_console()
+    start_scheduler()
+    sys.exit(0)
