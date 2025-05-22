@@ -1,5 +1,3 @@
-# src/config/settings.py
-
 import os
 from pathlib import Path
 import yaml
@@ -18,6 +16,7 @@ class RawSettings(BaseModel):
     tickers: TickersConfig
     scheduler: SchedulerConfig
     settings: Dict[str, int]
+    ticker_names: Dict[str, str] = {}
 
     @property
     def period(self) -> int:
@@ -32,18 +31,15 @@ class RawSettings(BaseModel):
         return self.settings["ema_window"]
 
 def load_settings(path: str = None) -> RawSettings:
-    # 1) если передан явный путь — используем его
     if path:
         config_path = Path(path)
     else:
-        # 2) если в ENV задан CONFIG_FILE — используем его
-        env = os.getenv("CONFIG_FILE")
-        if env:
-            config_path = Path(env)
+        env_path = os.getenv("CONFIG_FILE")
+        if env_path:
+            config_path = Path(env_path)
         else:
-            # 3) по умолчанию — файл config.yaml два уровня выше (корень проекта)
-            here = Path(__file__).parent        # src/config
-            project_root = here.parent.parent    # src/config -> src -> <root>
+            here = Path(__file__).parent
+            project_root = here.parent.parent
             config_path = project_root / "config.yaml"
 
     if not config_path.exists():
@@ -52,5 +48,4 @@ def load_settings(path: str = None) -> RawSettings:
     data = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     return RawSettings(**data)
 
-# глобальный объект
 settings = load_settings()

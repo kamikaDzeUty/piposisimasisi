@@ -1,51 +1,111 @@
-# config.yaml
-
 tickers:
   stock:
     - AAPL
-    - MSFT
-    - GOOG
-    - AMZN
     - TSLA
+    - GOOG
+    - MSFT
     - NVDA
     - META
-    - BRK-B
-    - JPM
-    - UNH
-    - V
-    - PG
-    - JNJ
-    - HD
-    - MA
-    - BAC
-    - XOM
-    - PFE
-    - KO
-    - TM
+    - AMZN
+    - BABA
+    - NFLX
+    - INTC
+    - AMD
+    - IBM
+    - ORCL
+    - DIS
+    - PYPL
+
   currency:
     - EURUSD=X
     - GBPUSD=X
-    - USDJPY=X
-    - USDCAD=X
+    - JPY=X
+    - CNY=X
     - AUDUSD=X
+    - USDCAD=X
     - USDCHF=X
-    - NZDUSD=X
-    - EURGBP=X
-    - EURJPY=X
-    - EURAUD=X
+    - BTC-USD
+    - ETH-USD
+    - DOGE-USD
+    - USDT-USD
+    - BNB-USD
+    - XRP-USD
+    - SOL-USD
+    - LTC-USD
+
   bond:
+    - ^TNX
     - ^IRX
     - ^FVX
-    - ^TNX
     - ^TYX
+    - ^BND
+    - IEF
+    - TLT
+    - SHY
+    - TIP
+    - BIL
+    - VGSH
+    - VGIT
+    - VGLT
+    - LQD
+    - HYG
 
 scheduler:
-  intervals:      # интервалы в минутах
+  intervals:
     stock: 1
-    currency: 5
+    currency: 3
     bond: 10
 
 settings:
-  period: 60       # число дней истории
+  period: 60
   sma_window: 14
   ema_window: 14
+
+ticker_names:
+  AAPL: "Apple Inc."
+  TSLA: "Tesla Inc."
+  GOOG: "Alphabet Inc."
+  MSFT: "Microsoft Corp."
+  NVDA: "NVIDIA Corp."
+  META: "Meta Platforms"
+  AMZN: "Amazon.com Inc."
+  BABA: "Alibaba Group"
+  NFLX: "Netflix Inc."
+  INTC: "Intel Corp."
+  AMD: "Advanced Micro Devices"
+  IBM: "IBM Corp."
+  ORCL: "Oracle Corp."
+  DIS: "The Walt Disney Company"
+  PYPL: "PayPal Holdings"
+
+  EURUSD=X: "Euro / US Dollar"
+  GBPUSD=X: "British Pound / US Dollar"
+  JPY=X: "Japanese Yen"
+  CNY=X: "Chinese Yuan"
+  AUDUSD=X: "Australian Dollar / US Dollar"
+  USDCAD=X: "US Dollar / Canadian Dollar"
+  USDCHF=X: "US Dollar / Swiss Franc"
+  BTC-USD: "Bitcoin"
+  ETH-USD: "Ethereum"
+  DOGE-USD: "Dogecoin"
+  USDT-USD: "Tether"
+  BNB-USD: "Binance Coin"
+  XRP-USD: "Ripple"
+  SOL-USD: "Solana"
+  LTC-USD: "Litecoin"
+
+  ^TNX: "10Y Treasury Note"
+  ^IRX: "13W T-Bill"
+  ^FVX: "5Y Treasury Note"
+  ^TYX: "30Y Treasury Bond"
+  ^BND: "Total Bond Market ETF"
+  IEF: "7-10 Year Treasury ETF"
+  TLT: "20+ Year Treasury ETF"
+  SHY: "1-3 Year Treasury ETF"
+  TIP: "Treasury Inflation-Protected"
+  BIL: "1-3 Month Treasury Bill ETF"
+  VGSH: "Vanguard Short-Term Gov Bond"
+  VGIT: "Vanguard Interm-Term Gov Bond"
+  VGLT: "Vanguard Long-Term Gov Bond"
+  LQD: "iShares Investment Grade Corp Bond"
+  HYG: "High Yield Corporate Bond ETF"

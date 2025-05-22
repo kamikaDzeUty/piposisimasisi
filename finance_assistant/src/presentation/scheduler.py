@@ -1,5 +1,3 @@
-# src/presentation/scheduler.py
-
 from datetime import datetime, timedelta
 from typing import Dict, Tuple
 
@@ -11,15 +9,7 @@ from src.usecases.get_top_assets import GetTopAssetsUseCase
 from src.presentation.utils import format_table
 from src.config.settings import settings
 
-
 class AssetScheduler:
-    """
-    Планировщик периодических задач по типам активов:
-      - акции — каждая stock_interval минуты,
-      - валюта — каждая currency_interval минуты,
-      - облигации — каждая bond_interval минуты.
-    Корректно обрабатывает команды и завершает работу по 'выход'.
-    """
     def __init__(self):
         self.repo = YahooAssetRepository()
         self.usecase = GetTopAssetsUseCase(
@@ -39,20 +29,20 @@ class AssetScheduler:
         print(f"\n[{datetime.now():%H:%M:%S}] {label}:")
         headers = [
             "Symbol", "Name", "Last Price",
-            f"SMA({self.usecase.sma_window})",
-            f"EMA({self.usecase.ema_window})",
-            "Profit"
+            f"SMA({self.usecase.sma_window})", f"EMA({self.usecase.ema_window})",
+            "SMA Profit %", "EMA Profit %"
         ]
         rows = [
             [
                 a.symbol,
-                a.name,
-                f"{last:.4f}",
-                f"{sma:.4f}",
-                f"{ema:.4f}",
-                f"{prof:.4f}"
+                settings.ticker_names.get(a.symbol, a.name),
+                f"${last:.2f}",
+                f"${sma:.2f}",
+                f"${ema:.2f}",
+                f"{profit_sma:+.2f}%",
+                f"{profit_ema:+.2f}%"
             ]
-            for a, last, sma, ema, prof in data
+            for a, last, sma, ema, profit_sma, profit_ema in data
         ]
         print(format_table(headers, rows))
 
@@ -77,20 +67,17 @@ class AssetScheduler:
                 if cmd == "выход":
                     print("Завершение по команде пользователя…")
                     break
-
                 if cmd in self.jobs_config:
                     asset_type, interval = self.jobs_config[cmd]
-                    # Немедленный запуск и сброс таймера
                     self._run_job(asset_type, cmd.capitalize())
-                    next_time = datetime.now() + timedelta(minutes=interval)
-                    self.scheduler.modify_job(job_id=cmd, next_run_time=next_time)
+                    next_run = datetime.now() + timedelta(minutes=interval)
+                    self.scheduler.modify_job(job_id=cmd, next_run_time=next_run)
                 else:
                     print("Неизвестная команда. Попробуйте ещё раз.")
         except (KeyboardInterrupt, EOFError):
             print("\nПолучен прерывающий сигнал, завершение…")
         finally:
             self.scheduler.shutdown()
-            # Метод просто возвращается — код после start_scheduler() может выполниться
 
 def start_scheduler():
     AssetScheduler().start()
