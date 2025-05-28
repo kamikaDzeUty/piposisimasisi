@@ -1,0 +1,31 @@
+[
+  {
+    "username": "string",
+    "password_hash": "$2b$12$L6Yz6oRxh0xZcTj61aN5Z.cQNXOs3sYmrX7TNWoY8Ayuoa2K2gGeC",
+    "email": "user@example.com",
+    "tracked_symbols": []
+  },
+  {
+    "username": "залупа",
+    "password_hash": "$2b$12$WWV/j4ejP7UJd/rqNCdxaO8ZFbdSnHUbtdCR7xVekEYBQPlNFwBfy",
+    "email": "kami@example.com",
+    "tracked_symbols": [
+      "TSLA, ПУТИН"
+    ]
+  },
+  {
+    "username": "Ваня",
+    "password_hash": "$2b$12$sZkM2d1XpPAPeSfveuX.qe0AcUTjTrIweyygzibqvaAjwpVOU/HjG",
+    "email": "kamikadzeuty@example.com",
+    "tracked_symbols": [
+      "ПУТИН, ОБАМА, БАБУШКА, БАЛАЛАЙКА",
+      "ВФЫВ"
+    ]
+  },
+  {
+    "username": "камика",
+    "password_hash": "$2b$12$OpnTZSmUEdmuKiJJ3.Ts7enLWkF2Yfs3sIXmiYz/oV/mdmXYQIfIm",
+    "email": "ВаняВаняВаняВаня@example.com",
+    "tracked_symbols": []
+  }
+]

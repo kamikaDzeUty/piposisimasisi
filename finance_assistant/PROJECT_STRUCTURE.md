@@ -1,3 +1,4 @@
+uvicorn src.presentation.web_registration.app:app --reload --port 8000
 finance_assistant/  
 ├── config.yaml               # YAML-конфигурация: тикеры, интервалы, period, sma/ema окна  
 ├── requirements.txt          # зависимости проекта

@@ -1,6 +1,6 @@
 import pytest
 
-from src.adapters.repositories.inmemory_user_repository import InMemoryUserRepository
+from src.adapters.repositories.file_user_repository import InMemoryUserRepository
 from src.domain.entities.user import User
 
 
